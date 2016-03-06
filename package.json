@@ -1,0 +1,12 @@
+{
+	"name": "verein",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/thelfensdrfer/verein.git"
+	},
+	"license": "CC-BY-NC-SA-4.0",
+	"devDependencies": {
+		"gulp": "3.9.*",
+		"laravel-elixir": "4.0.*"
+	}
+}

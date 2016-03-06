@@ -1,0 +1,28 @@
+{
+  "name": "connect",
+  "version": "0.1.0",
+  "authors": [
+    "Tim Helfensdörfer <tim@visualappeal.de>"
+  ],
+  "description": "VisualAppeal Connect",
+  "main": "public/index.php",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "CC-BY-NC-SA-4.0",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "resources/assets/components",
+    "vendor",
+    "tests"
+  ],
+  "dependencies": {
+    "admin-lte": "2.3.*",
+    "bootstrap": "3.3.*",
+    "jquery": "2.2.*",
+    "fontawesome": "4.5.*",
+    "flag-icon-css": "1.3.*"
+  }
+}
