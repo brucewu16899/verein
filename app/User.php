@@ -35,8 +35,8 @@ use Ban;
  * @property bool $isActivated
  *
  * @property Member $member
- * @property Message[] $recentMessages
- * @property Message[] $unreadMessages
+ * @property ConversationMessage[] $recentMessages
+ * @property ConversationMessage[] $unreadMessages
  * @property Notification[] $recentNotifications
  * @property Notification[] $unreadNotifications
  * @property Task[] $notCompletedTasks
@@ -185,7 +185,7 @@ class User extends EloquentUser implements AuthenticatableContract
 	 */
 	public function recentMessages()
 	{
-		return $this->hasMany('Verein\Message', 'to_user_id')
+		return $this->hasMany('Verein\ConversationMessage', 'to_user_id')
 			->user()
 			->conversations()
 			->limit(10);
@@ -198,7 +198,7 @@ class User extends EloquentUser implements AuthenticatableContract
 	 */
 	public function unreadMessages()
 	{
-		return $this->hasMany('Verein\Message', 'to_user_id')
+		return $this->hasMany('Verein\ConversationMessage', 'to_user_id')
 			->unread();
 	}
 
@@ -245,7 +245,7 @@ class User extends EloquentUser implements AuthenticatableContract
 	}
 
 	/**
-	 * Get all unread messages for this user.
+	 * Get all not completed tasks for this user.
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */

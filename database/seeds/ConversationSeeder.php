@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class MessageSeeder extends Seeder
+class ConversationSeeder extends Seeder
 {
 	/**
 	 * Run the database seeds.
@@ -12,14 +12,14 @@ class MessageSeeder extends Seeder
 	public function run()
 	{
 		// 1
-		\Verein\MessageConversation::create([
+		\Verein\Conversation::create([
 			'from_user_id' => 1,
 			'to_user_id' => 2,
 		]);
 
 		// 1
-		\Verein\Message::create([
-			'message_conversation_id' => 1,
+		\Verein\ConversationMessage::create([
+			'conversation_id' => 1,
 			'from_user_id' => 2,
 			'to_user_id' => 1,
 			'message' => "Hi Tim, how are you? Can we talk later?\n\nKind regards Arno",
@@ -30,8 +30,8 @@ class MessageSeeder extends Seeder
 		]);
 
 		// 2
-		\Verein\Message::create([
-			'message_conversation_id' => 1,
+		\Verein\ConversationMessage::create([
+			'conversation_id' => 1,
 			'from_user_id' => 1,
 			'to_user_id' => 2,
 			'message' => "Hi Arno,\nThat would be great. Just call me on my smartphone!",
@@ -42,8 +42,8 @@ class MessageSeeder extends Seeder
 		]);
 
 		// 3
-		\Verein\Message::create([
-			'message_conversation_id' => 1,
+		\Verein\ConversationMessage::create([
+			'conversation_id' => 1,
 			'from_user_id' => 2,
 			'to_user_id' => 1,
 			'message' => "Ok I will call you on your new number.",

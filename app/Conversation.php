@@ -4,30 +4,23 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * The MessageConversation stores which TaskJob was assigned to which Member.
+ * The Conversation stores conversation meta data.
  *
  * @property int $id
  * @property int $from_user_id
  * @property int $to_user_id
+ * @property string $title
+ * @property string $abstract
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property \Carbon\Carbon $deleted_at
  *
- * @property string $name
- *
  * @property User $sender
  * @property User $receiver
  */
-class MessageConversation extends Model
+class Conversation extends Model
 {
 	use SoftDeletes;
-
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'messages_conversations';
 
 	/**
 	 * The attributes that are mass assignable.
@@ -50,13 +43,39 @@ class MessageConversation extends Model
 	}
 
 	/**
+	 * Get the first 100 characters of the last message.
+	 *
+	 * @return string
+	 */
+	public function getAbstractAttribute()
+	{
+		if (isset($this->lastMessage))
+			return \Markdown::parseParagraph(substr($this->lastMessage->getOriginal('message'), 0, 100));
+		else
+			return '';
+	}
+
+	/**
+	 * Get the last message contents.
+	 *
+	 * @return string
+	 */
+	public function getLastMessageAttribute()
+	{
+		if (count($this->messages) > 0)
+			return $this->messages->last();
+		else
+			return null;
+	}
+
+	/**
 	 * Get the Messages of the MessageConversation.
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function messages()
 	{
-		return $this->hasMany('Verein\Message', 'message_conversation_id')
+		return $this->hasMany('Verein\ConversationMessage', 'conversation_id')
 			->orderBy('created_at', 'asc');
 	}
 
@@ -78,5 +97,23 @@ class MessageConversation extends Model
 	public function receiver()
 	{
 		return $this->belongsTo('Verein\User', 'to_user_id');
+	}
+
+	/**
+	 * Returns all Conversations where a User is part of the conversation.
+	 *
+	 * @param Illuminate\Database\Query\Builder $query
+	 * @param int $userId (Default: null)
+	 *
+	 * @return Illuminate\Database\Query\Builder
+	 */
+	public function scopeUser($query, $userId = null)
+	{
+		if (empty($userId))
+			$userId = \Sentinel::getUser()->id;
+
+		return $query
+			->where('from_user_id', $userId)
+			->orWhere('to_user_id', $userId);
 	}
 }

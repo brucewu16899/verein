@@ -1,6 +1,6 @@
 <?php
 
-class MessageTest extends TestCase
+class ConversationTest extends TestCase
 {
 	/**
 	 * Test that a conversation can be created and is not created twice for the same two users.

@@ -1,12 +1,12 @@
-<?php namespace Verein\Http\Controllers\Message;
+<?php namespace Verein\Http\Controllers\Conversation;
 
 use Illuminate\Http\Request;
 
 use Verein\Http\Controllers\Controller;
-use Verein\Message;
-use Verein\MessageConversation;
+use Verein\ConversationMessage;
+use Verein\Conversation;
 
-class MessageConversationController extends Controller
+class ConversationController extends Controller
 {
 	/**
 	 * Rules to create a message
@@ -32,9 +32,8 @@ class MessageConversationController extends Controller
 	 */
 	public function index()
 	{
-		return view('message.conversation.index', [
-			'messages' => Message::conversations()
-				->user()
+		return view('conversation.index', [
+			'conversations' => Conversation::user()
 				->with([
 					'sender',
 					'receiver',
@@ -53,7 +52,7 @@ class MessageConversationController extends Controller
 	 */
 	public function show($id)
 	{
-		$conversation = MessageConversation::where('id', '=', $id)
+		$conversation = Conversation::where('id', '=', $id)
 			->with([
 				'messages',
 				'messages.sender',
@@ -61,23 +60,23 @@ class MessageConversationController extends Controller
 			])
 			->firstOrFail();
 
-		$unread = \DB::table('messages')
+		$unread = \DB::table('conversation_messages')
 			->where('to_user_id', '=', \Sentinel::getUser()->id)
-			->where('message_conversation_id', '=', $id)
+			->where('conversation_id', '=', $id)
 			->where('read', '=', 0)
 			->count();
 
 		if ($unread > 0)
-			\DB::table('messages')
+			\DB::table('conversation_messages')
 				->where('to_user_id', '=', \Sentinel::getUser()->id)
-				->where('message_conversation_id', '=', $id)
+				->where('conversation_id', '=', $id)
 				->where('read', '=', 0)
 				->update([
 					'read' => 1,
 					'read_at' => \Carbon\Carbon::now(),
 				]);
 
-		return view('message.conversation.show', [
+		return view('conversation.show', [
 			'conversation' => $conversation,
 		]);
 	}
@@ -94,12 +93,12 @@ class MessageConversationController extends Controller
 		$this->validate($request, $this->createMessageRules);
 
 		// Check if conversation already exists
-		$conversation = MessageConversation::where('from_user_id', '=', \Sentinel::getUser()->id)
+		$conversation = Conversation::where('from_user_id', '=', \Sentinel::getUser()->id)
 			->where('to_user_id', '=', $request->input('to_user_id'))
 			->first();
 
 		if (!isset($conversation)) {
-			$conversation = MessageConversation::create([
+			$conversation = Conversation::create([
 				'from_user_id' => \Sentinel::getUser()->id,
 				'to_user_id' => $request->input('to_user_id'),
 			]);

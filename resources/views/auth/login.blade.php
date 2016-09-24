@@ -7,8 +7,6 @@
 			<div class="panel-body">
 				@include('layouts._errors')
 
-				<h3>{{ trans('auth.login.section-headline') }}</h3>
-
 				{!! Form::open(['route' => 'account.doLogin']) !!}
 					<div class="form-group form-required">
 						<label class="control-label">{{ trans('auth.login.email') }}</label>
@@ -30,7 +28,7 @@
 
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary" style="margin-right: 15px;">
-							{{ trans('auth.login.button')}}
+							{{ trans('auth.login.login')}}
 						</button>
 
 						<a href="#">{{ trans('auth.login.forget-password') }}</a>

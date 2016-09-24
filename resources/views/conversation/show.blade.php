@@ -5,7 +5,7 @@
 		<h1>{{ $conversation->title }}</h1>
 		<ol class="breadcrumb">
 			<li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> {{ trans('dashboard.breadcrumb') }}</a></li>
-			<li><a href="{{ route('conversation.index') }}"><i class="fa fa-envelope-o"></i> {{ trans('message.breadcrumb') }}</a></li>
+			<li><a href="{{ route('conversation.index') }}"><i class="fa fa-envelope-o"></i> {{ trans('conversation.index.breadcrumb') }}</a></li>
 			<li class="active">{{ $conversation->title }}</li>
 		</ol>
 	</section>

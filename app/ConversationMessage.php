@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * The Message is a message between one User and another.
  *
  * @property int $id
- * @property int $message_conversation_id
+ * @property int $conversation_id
  * @property int $from_user_id
  * @property int $to_user_id
  * @property string $message
@@ -18,12 +18,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon $deleted_at
  *
  * @property string $humanDiff
- * @property string $abstract
  *
  * @property User $sender
  * @property User $receiver
  */
-class Message extends Model
+class ConversationMessage extends Model
 {
 	use SoftDeletes;
 
@@ -33,18 +32,11 @@ class Message extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-		'message_conversation_id',
+		'conversation_id',
 		'from_user_id',
 		'to_user_id',
 		'message',
 	];
-
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'messages';
 
 	/**
 	 * Get the difference between the date where the message was created and now
@@ -55,16 +47,6 @@ class Message extends Model
 	public function getHumanDiffAttribute()
 	{
 		return $this->created_at->diffForHumans(null, true);
-	}
-
-	/**
-	 * Get the first 100 characters of the message.
-	 *
-	 * @return string
-	 */
-	public function getAbstractAttribute()
-	{
-		return \Markdown::parseParagraph(substr($this->getOriginal('message'), 0, 100));
 	}
 
 	/**
@@ -86,7 +68,7 @@ class Message extends Model
 	 */
 	public function conversation()
 	{
-		return $this->belongsTo('Verein\MessageConversation', 'message_conversation_id');
+		return $this->belongsTo('Verein\ConversationMessage', 'conversation_id');
 	}
 
 	/**
@@ -133,8 +115,8 @@ class Message extends Model
 	public function scopeConversations($query)
 	{
 		return $query
-			->from(\DB::raw('(select * from `messages` order by `created_at` desc) as `messages`'))
-			->groupBy('message_conversation_id');
+			->from(\DB::raw('(select * from `conversation_messages` order by `created_at` desc) as `conversation_messages`'))
+			->groupBy('conversation_id');
 	}
 
 	/**

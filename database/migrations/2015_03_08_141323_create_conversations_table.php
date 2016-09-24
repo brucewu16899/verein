@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMessagesTable extends Migration {
+class CreateConversationsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateMessagesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('messages_conversations', function(Blueprint $table) {
+		Schema::create('conversations', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('from_user_id')->unsigned();
 			$table->integer('to_user_id')->unsigned();
@@ -30,10 +30,10 @@ class CreateMessagesTable extends Migration {
 				->onDelete('cascade');
 		});
 
-		Schema::create('messages', function(Blueprint $table)
+		Schema::create('conversation_messages', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('message_conversation_id')->unsigned();
+			$table->integer('conversation_id')->unsigned();
 			$table->integer('from_user_id')->unsigned();
 			$table->integer('to_user_id')->unsigned();
 			$table->text('message');
@@ -43,9 +43,9 @@ class CreateMessagesTable extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 
-			$table->foreign('message_conversation_id')
+			$table->foreign('conversation_id')
 				->references('id')
-				->on('messages_conversations')
+				->on('conversations')
 				->onDelete('cascade');
 			$table->foreign('from_user_id')
 				->references('id')
@@ -65,8 +65,8 @@ class CreateMessagesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('messages');
-		Schema::drop('messages_conversations');
+		Schema::drop('conversation_messages');
+		Schema::drop('conversations');
 	}
 
 }

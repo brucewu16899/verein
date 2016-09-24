@@ -1,12 +1,12 @@
-<?php namespace Verein\Http\Controllers\Message;
+<?php namespace Verein\Http\Controllers\Conversation;
 
 use Illuminate\Http\Request;
 
 use Verein\Http\Controllers\Controller;
-use Verein\Message;
-use Verein\MessageConversation;
+use Verein\ConversationMessage;
+use Verein\Conversation;
 
-class MessageController extends Controller
+class ConversationMessageController extends Controller
 {
 	/**
 	 * Rules to create a message
@@ -35,7 +35,7 @@ class MessageController extends Controller
 	 */
 	public function store(Request $request, $conversationId)
 	{
-		$conversation = MessageConversation::findOrFail($conversationId);
+		$conversation = Conversation::findOrFail($conversationId);
 		if ($conversation->from_user_id != \Sentinel::getUser()->id &&
 			$conversation->to_user_id != \Sentinel::getUser()->id)
 			abort(403);
@@ -46,8 +46,8 @@ class MessageController extends Controller
 			? $conversation->to_user_id
 			: $conversation->from_user_id;
 
-		$message = Message::create([
-			'message_conversation_id' => $conversationId,
+		$message = ConversationMessage::create([
+			'conversation_id' => $conversation->id,
 			'from_user_id' => \Sentinel::getUser()->id,
 			'to_user_id' => $toUserId,
 			'message' => $request->input('message'),
@@ -59,7 +59,7 @@ class MessageController extends Controller
 		$conversation->touch();
 
 		return redirect()->route('conversation.show', [
-			'conversation' => $message->message_conversation_id,
+			'conversation' => $conversation->id,
 			'#message-' . $message->id,
 		]);
 	}

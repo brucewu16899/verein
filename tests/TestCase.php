@@ -242,32 +242,32 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 	 * @param VisualAppeal\Connect\User $user1 (Default: null, newly created)
 	 * @param VisualAppeal\Connect\User $user2 (Default: null, newly created)
 	 *
-	 * @return VisualAppeal\Connect\MessageConversation
+	 * @return VisualAppeal\Connect\Conversation
 	 */
 	public function createConversation($user1 = null, $user2 = null)
 	{
 		$user1 = $user1 ?: $this->createUser();
 		$user2 = $user2 ?: $this->createUser();
 
-		return \Verein\MessageConversation::create([
+		return \Verein\Conversation::create([
 			'from_user_id' => $user1->id,
 			'to_user_id' => $user2->id,
 		]);
 	}
 
 	/**
-	 * Create a random Message in a conversation.
+	 * Create a random ConversationMessage in a conversation.
 	 *
-	 * @param VisualAppeal\Connect\MessageConversation $conversation (Default: null, newly created)
+	 * @param VisualAppeal\Connect\Conversation $conversation (Default: null, newly created)
 	 *
-	 * @return VisualAppeal\Connect\Message
+	 * @return VisualAppeal\Connect\ConversationMessage
 	 */
 	public function createMessage($conversation)
 	{
 		$conversation = $conversation ?: $this->createConversation();
 
-		return \Verein\Message::create([
-			'message_conversation_id' => $conversation->id,
+		return \Verein\ConversationMessage::create([
+			'conversation_id' => $conversation->id,
 			'from_user_id' => $conversation->from_user_id,
 			'to_user_id' => $conversation->to_user_id,
 			'message' => $this->faker->sentence,

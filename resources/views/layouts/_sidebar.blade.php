@@ -26,9 +26,12 @@
 
 		<!-- Sidebar Menu -->
 		<ul class="sidebar-menu">
-			<li class="<?php echo \Config::get('app.active', '') == 'user' ? 'active' : ''; ?>"><a href="{{ route('user.index') }}"><span>{{ trans('core.sidebar.main.users') }}</span></a></li>
-			<li class="header">{{ trans('core.sidebar.projects.header') }}</li>
+			<li class="header">{{ trans('core.sidebar.crm.header') }}</li>
 			<li class="<?php echo \Config::get('app.active', '') == 'member' ? 'active' : ''; ?>"><a href="{{ route('member.index') }}"><span>{{ trans('core.sidebar.crm.members') }}</span></a></li>
+			<li class="header">{{ trans('core.sidebar.finance.header') }}</li>
+			<li class="<?php echo \Config::get('app.active', '') == 'finance' ? 'active' : ''; ?>"><a href="#"><span>{{ trans('core.sidebar.finance.index') }}</span></a></li>
+			<li class="header">{{ trans('core.sidebar.system.header') }}</li>
+			<li class="<?php echo \Config::get('app.active', '') == 'user' ? 'active' : ''; ?>"><a href="{{ route('user.index') }}"><span>{{ trans('core.sidebar.system.users') }}</span></a></li>
 		</ul>
 		<!-- /.sidebar-menu -->
 	</section>

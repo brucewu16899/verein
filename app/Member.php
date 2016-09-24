@@ -110,6 +110,18 @@ class Member extends Model
 	}
 
 	/**
+	 * Return the translated sex of the member.
+	 *
+	 * @param string $default
+	 *
+	 * @return string
+	 */
+	public function getSexAttribute($default)
+	{
+		return trans('member.sex.' . $default);
+	}
+
+	/**
 	 * Get the name of the Member.
 	 *
 	 * If the member name is empty and a user is set, return the name of the user.
@@ -120,8 +132,6 @@ class Member extends Model
 	{
 		if (!empty($this->first_name) || !empty($this->last_name)) {
 			$parts = [];
-			if (!empty($this->sex))
-				$parts[] = ($this->sex === 'female') ? trans('member.sex.female') : trans('member.sex.male');
 
 			if (!empty($this->form_of_address))
 				$parts[] = $this->form_of_address;

@@ -24,7 +24,7 @@
 							<ul class="menu">
 								@foreach ($user->recentMessages as $message)
 									<li><!-- start message -->
-										<a href="{{ route('conversation.show', ['conversation' => $message->message_conversation_id]) }}">
+										<a href="{{ route('conversation.show', ['conversation' => $message->conversation_id, '#message-' . $message->id]) }}">
 											<div class="pull-left">
 												<!-- User Image -->
 												<img src="{{ $message->sender->avatarUrl }}" class="img-circle" alt="{{{ $message->sender->name }}}">
@@ -86,44 +86,6 @@
 					</ul>
 				</li>
 				<!-- /.notifications-menu -->
-
-				<!-- Tasks Menu -->
-				<li class="dropdown tasks-menu">
-					<!-- Menu Toggle Button -->
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<i class="fa fa-flag-o"></i>
-						<span class="label label-danger">{{ $user->notCompletedTasks()->count() }}</span>
-					</a>
-					<ul class="dropdown-menu">
-						<li class="header">{{ trans('core.nav.tasks.notcompleted', [':count' => $user->notCompletedTasks()->count()]) }}</li>
-						<li>
-							<!-- Inner menu: contains the tasks -->
-							<ul class="menu">
-								@foreach ($user->notCompletedTasks as $task)
-									<li><!-- Task item -->
-										<a href="#">
-											<!-- Task title and progress text -->
-											<h3>
-												{{{ $task->title }}}
-												<small class="pull-right">{{ $task->progress }}%</small>
-											</h3>
-											<!-- The progress bar -->
-											<div class="progress xs">
-												<div class="progress-bar progress-bar-aqua" style="width: {{ $task->progress }}%" role="progressbar" aria-valuenow="{{ $task->progress }}" aria-valuemin="0" aria-valuemax="100">
-													<span class="sr-only">{{ $task->progress }}% Complete</span>
-												</div>
-											</div>
-										</a>
-									</li><!-- end task item -->
-								@endforeach
-							</ul>
-						</li>
-						<li class="footer">
-							<a href="#">{{ trans('core.nav.tasks.all') }}</a>
-						</li>
-					</ul>
-				</li>
-				<!-- /.tasks-menu -->
 
 				<!-- User Account Menu -->
 				<li class="dropdown user user-menu">

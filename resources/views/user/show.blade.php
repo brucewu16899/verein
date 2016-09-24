@@ -5,7 +5,7 @@
 		<h1>{{ $theUser->name }}</h1>
 		<ol class="breadcrumb">
 			<li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> {{ trans('dashboard.breadcrumb') }}</a></li>
-			<li><a href="{{ route('user.index') }}">{{ trans('user.breadcrumb') }}</a></li>
+			<li><a href="{{ route('user.index') }}">{{ trans('user.index.breadcrumb') }}</a></li>
 			<li class="active">{{{ $theUser->name }}}</li>
 		</ol>
 	</section>

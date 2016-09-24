@@ -66,14 +66,14 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 	});
 
 	/**
-	 * Messages
+	 * Conversations/Messages
 	 */
-	Route::group(['namespace' => 'Message'], function() {
-		Route::resource('conversation', 'MessageConversationController', [
+	Route::group(['namespace' => 'Conversation'], function() {
+		Route::resource('conversation', 'ConversationController', [
 			'except' => ['create', 'edit', 'update', 'destroy'],
 		]);
 
-		Route::resource('conversation.message', 'MessageController', [
+		Route::resource('conversation.message', 'ConversationMessageController', [
 			'except' => ['index', 'show', 'edit', 'update', 'destroy'],
 		]);
 	});

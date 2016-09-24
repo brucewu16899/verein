@@ -15,8 +15,7 @@ class DatabaseSeeder extends Seeder
 
 		if (Config::get('app.env') == 'development') {
 			$this->call('UserSeeder');
-			$this->call('MessageSeeder');
-			$this->call('TaskSeeder');
+			$this->call('ConversationSeeder');
 		}
 	}
 }
