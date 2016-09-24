@@ -5,8 +5,8 @@ use Illuminate\Support\ServiceProvider;
 use Verein\Extensions\BanRepository;
 use Verein\Extensions\BanCheckpoint;
 
-class AppServiceProvider extends ServiceProvider {
-
+class AppServiceProvider extends ServiceProvider
+{
 	/**
 	 * Bootstrap any application services.
 	 *

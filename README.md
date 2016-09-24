@@ -11,12 +11,13 @@ Install the project with following commands:
 * Install frontent dependencies `bower install`
 * Migrate database `php artisan migrate`
 * Build javascript and stylesheets `gulp`
+* Execute `php artisan db:seed` to create the admin user defined in `.env` and test data if `APP_ENV` is `development`
 
 ### Requirements
 
-* PHP >= 5.4
-* MySQL >= 5.5 / MariaDB >= 10.0
-* Node.js >= 0.8 / npm
+* PHP >= 5.6
+* MySQL >= 5.7 / MariaDB >= 10.0
+* Node.js >= 4.2 / npm
 * Composer - `curl -sS https://getcomposer.org/installer | php -- --install-dir=bin`
 * gulp - `npm install gulp --global`
 
@@ -27,7 +28,7 @@ Maxminds [GeoLite2 Database](https://dev.maxmind.com/geoip/geoip2/geolite2/). Co
 * Firefox
 * Google Chrome
 * Safari
-* Internet Explorer >= IE 9 (IE 6-8 partially supported)
+* Internet Explorer >= IE 11
 * Mobile Safari
 * Mobile Chrome
 
