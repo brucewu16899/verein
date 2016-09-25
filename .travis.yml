@@ -28,3 +28,6 @@ script: vendor/bin/phpunit --coverage-clover storage/logs/clover.xml
 
 after_success:
   - php vendor/bin/coveralls
+
+after_failure:
+  - cat storage/logs/*.log
