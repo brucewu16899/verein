@@ -147,26 +147,26 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 			'first_name' => $this->faker->firstName,
 			'last_name' => $this->faker->lastName,
 			'email' => $this->faker->email,
-			'website' => $this->faker->url,
 			'sex' => $this->faker->boolean(50) ? 'male' : 'female',
 			'birthday' => $this->faker->date,
 		]);
 	}
 
 	/**
-	 * Create a random MemberComment.
+	 * Create a random MemberDate.
 	 *
 	 * @param VisualAppeal\Connect\Member $member (Default: null, newly created)
 	 *
-	 * @return VisualAppeal\Connect\MemberComment
+	 * @return VisualAppeal\Connect\MemberDate
 	 */
-	protected function createMemberComment($member = null)
+	protected function createMemberDate($member = null)
 	{
 		$member = $member ?: $this->createMember();
 
-		return \Verein\MemberComment::create([
+		return \Verein\MemberDate::create([
 			'member_id' => $member->id,
-			'comment' => $this->faker->paragraph,
+			'type' => 'private_mobile',
+			'value' => $this->faker->phoneNumber,
 		]);
 	}
 

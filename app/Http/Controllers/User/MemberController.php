@@ -55,7 +55,7 @@ class MemberController extends Controller
 		$member = Member::where('id', '=', $id)
 			->with([
 				'user',
-				'comments',
+				'dates',
 			])
 			->firstOrFail();
 

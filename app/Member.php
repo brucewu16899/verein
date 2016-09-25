@@ -22,7 +22,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property User $creator
  * @property User $user
- * @property MemberComment[] $comments
  * @property MemberDate[] $dates
  */
 class Member extends Model
@@ -80,16 +79,6 @@ class Member extends Model
 	public function user()
 	{
 		return $this->hasOne('\Verein\User');
-	}
-
-	/**
-	 * Return comments.
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function comments()
-	{
-		return $this->hasMany('Verein\MemberComment');
 	}
 
 	/**

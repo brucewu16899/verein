@@ -14,7 +14,7 @@ before_script:
   # Init config
   - cp .env.travis .env
   # Create database
-  - mysql -e 'create database travis;'
+  - mysql -e 'create database testing;'
   # Install dependencies
   - composer self-update
   - composer install --prefer-source --no-interaction --optimize-autoloader

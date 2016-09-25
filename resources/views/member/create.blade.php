@@ -50,11 +50,6 @@
 					</div>
 
 					<div class="form-group">
-						<label class="control-label">{{ trans('member.create.website') }}</label>
-						<input type="url" class="form-control" name="website" value="{{ old('website') }}">
-					</div>
-
-					<div class="form-group">
 						<label class="control-label">{{ trans('member.create.sex') }}</label>
 						{!! Form::select('sex', [
 							'female' => 'female',

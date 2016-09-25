@@ -13,7 +13,7 @@ class MemberTest extends TestCase
 	 */
 	public function testCreate()
 	{
-		$member = $this->createMember();
+		$this->createMember();
 
 		$member = Member::find(1);
 		$this->assertNotNull($member, 'Member could not be saved');
@@ -120,7 +120,7 @@ class MemberTest extends TestCase
 
 		$this->assertRedirectedToRoute('member.index');
 
-		$member = \Verein\Member::find($member->id);
+		$member = Member::find($member->id);
 		$this->assertNull($member);
 	}
 }

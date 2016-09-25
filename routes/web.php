@@ -109,10 +109,6 @@ Route::group(['middleware' => ['web', 'superuser']], function() {
 			'except' => ['index', 'show'],
 		]);
 
-		Route::resource('member.comment', 'MemberCommentController', [
-			'except' => ['index', 'show'],
-		]);
-
 		Route::resource('member.date', 'MemberDateController', [
 			'except' => ['index', 'show'],
 		]);

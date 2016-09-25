@@ -5,7 +5,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 use Verein\User;
 use Verein\Member;
-use Verein\MemberComment;
+use Verein\MemberDate;
 
 use Verein\Notification;
 
@@ -45,8 +45,8 @@ class EventServiceProvider extends ServiceProvider
 				$member->user_id = \Sentinel::getUser()->id;
 		});
 
-		// MemberComment about to be created
-		MemberComment::creating(function(MemberComment $memberComment) {
+		// MemberDate about to be created
+		MemberDate::creating(function(MemberDate $memberComment) {
 			if (\Sentinel::check())
 				$memberComment->user_id = \Sentinel::getUser()->id;
 		});

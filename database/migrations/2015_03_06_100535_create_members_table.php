@@ -73,28 +73,6 @@ class CreateMembersTable extends Migration
 				->onDelete('set null');
 		});
 
-		Schema::create('member_comments', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->integer('member_id')->unsigned();
-			$table->integer('user_id')
-				->unsigned()
-				->nullable();
-			$table->text('comment');
-
-			$table->timestamps();
-			$table->softDeletes();
-
-			$table->foreign('member_id')
-				->references('id')
-				->on('members')
-				->onDelete('cascade');
-			$table->foreign('user_id')
-				->references('id')
-				->on('users')
-				->onDelete('set null');
-		});
-
 		Schema::table('users', function(Blueprint $table) {
 			$table->integer('member_id')
 				->unsigned()
@@ -135,7 +113,6 @@ class CreateMembersTable extends Migration
 		});
 
 		Schema::drop('member_dates');
-		Schema::drop('member_comments');
 		Schema::drop('members');
 	}
 }
