@@ -1,7 +1,11 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 class LoginTest extends TestCase
 {
+	use DatabaseMigrations;
+
 	/**
 	 * Test that a user has no access to controller actions with auth middleware.
 	 */

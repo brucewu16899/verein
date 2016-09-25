@@ -112,12 +112,10 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 	 */
 	protected function createSuperuser($password = '123456')
 	{
-		$lastLogin = $this->faker->dateTime();
-
 		$admin = \Sentinel::registerAndActivate([
 			'email' => $this->faker->email,
 			'password' => $password,
-			'last_login' => $lastLogin,
+			'last_login' => $this->faker->dateTime(),
 			'first_name' => $this->faker->firstName,
 			'last_name' => $this->faker->lastName,
 		]);

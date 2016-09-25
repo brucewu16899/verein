@@ -1,9 +1,13 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 use \Verein\User;
 
 class UserTest extends TestCase
 {
+	use DatabaseMigrations;
+
 	/**
 	 * Test that the user get logged out.
 	 */

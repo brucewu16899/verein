@@ -1,7 +1,11 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 class ConversationTest extends TestCase
 {
+	use DatabaseMigrations;
+
 	/**
 	 * Test that a conversation can be created and is not created twice for the same two users.
 	 */

@@ -1,9 +1,13 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 use Verein\MemberComment;
 
 class MemberCommentTest extends TestCase
 {
+	use DatabaseMigrations;
+
 	/**
 	 * Test that a employee could be created with the minimum input.
 	 */

@@ -1,9 +1,13 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 use Verein\Notification;
 
 class NotificationTest extends TestCase
 {
+	use DatabaseMigrations;
+
 	/**
 	 * Label notification as from view.
 	 */

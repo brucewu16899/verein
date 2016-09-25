@@ -1,9 +1,16 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 use Verein\Extensions\DiffRenderer;
 
 class DiffRendererTest extends TestCase
 {
+	use DatabaseMigrations;
+
+	/**
+	 * Test that diff contains inserted elements.
+	 */
 	public function testInsert()
 	{
 		$old = ['equal'];
@@ -17,6 +24,9 @@ class DiffRendererTest extends TestCase
 		$this->assertContains('diff-change-insert', $render);
 	}
 
+	/**
+	 * Test that diff contains delete elements.
+	 */
 	public function testDelete()
 	{
 		$old = ['equal', 'delete'];
@@ -30,6 +40,9 @@ class DiffRendererTest extends TestCase
 		$this->assertContains('diff-change-delete', $render);
 	}
 
+	/**
+	 * Test that diff contains equal elements.
+	 */
 	public function testEquals()
 	{
 		$old = ['equal', 'first'];
@@ -42,6 +55,9 @@ class DiffRendererTest extends TestCase
 		$this->assertContains('diff-change-equal', $render);
 	}
 
+	/**
+	 * Test that diff contains replaced elements.
+	 */
 	public function testReplace()
 	{
 		$old = ['first', 'equal'];

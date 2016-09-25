@@ -1,9 +1,13 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 use Verein\Member;
 
 class MemberTest extends TestCase
 {
+	use DatabaseMigrations;
+
 	/**
 	 * Test that a member could be created with the minimum input.
 	 */

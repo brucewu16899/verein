@@ -1,7 +1,11 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 class DashboardTest extends TestCase
 {
+	use DatabaseMigrations;
+
 	/**
 	 * Test that guests has no access to the dashboard.
 	 */

@@ -1,9 +1,13 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 use \Verein\User;
 
 class SuperUserTest extends TestCase
 {
+	use DatabaseMigrations;
+
 	/**
 	 * Test that a guest cannot access superuser routes.
 	 */
