@@ -3,12 +3,12 @@
 @section('content')
 	<section class="content-header">
 		<h1>
-			{{ trans('member.create.title') }}
-			<small>{{ trans('member.create.subtitle') }}</small>
+			{{ $member->name }}
+			<small>{{ trans('member.edit.subtitle') }}</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> {{ trans('dashboard.breadcrumb') }}</a></li>
-			<li><a href="{{ route('member.index') }}">{{ trans('member.breadcrumb') }}</a></li>
+			<li><a href="{{ route('member.index') }}">{{ trans('member.index.breadcrumb') }}</a></li>
 			<li><a href="{{ route('member.show', ['member' => $member->id]) }}">{{ $member->name }}</a></li>
 			<li class="active">{{ trans('member.edit.breadcrumb') }}</li>
 		</ol>
@@ -50,15 +50,10 @@
 					</div>
 
 					<div class="form-group">
-						<label class="control-label">{{ trans('member.edit.website') }}</label>
-						{!! Form::url('website', null, ['class' => 'form-control']) !!}
-					</div>
-
-					<div class="form-group">
 						<label class="control-label">{{ trans('member.edit.sex') }}</label>
 						{!! Form::select('sex', [
-							'female' => 'female',
-							'male' => 'male'
+							'female' => trans('member.sex.female'),
+							'male' => trans('member.sex.male')
 						], null, ['class' => 'form-control']) !!}
 					</div>
 

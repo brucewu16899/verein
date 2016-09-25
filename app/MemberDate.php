@@ -9,17 +9,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $id
  * @property int $member_id
  * @property int $user_id
- * @property string $comment
+ * @property string $type
+ * @property string $value
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property \Carbon\Carbon $deleted_at
  *
- * @property string $htmlContent
- *
  * @property Member $member
  * @property User $creator
  */
-class MemberComment extends Model
+class MemberDate extends Model
 {
 	use SoftDeletes;
 
@@ -30,8 +29,16 @@ class MemberComment extends Model
 	 */
 	protected $fillable = [
 		'member_id',
-		'comment',
+		'type',
+		'value',
 	];
+
+	/**
+	 * Table of the model.
+	 *
+	 * @var string
+	 */
+	protected $table = 'member_dates';
 
 	/**
 	 * Get the Member for this comment.
@@ -54,12 +61,14 @@ class MemberComment extends Model
 	}
 
 	/**
-	 * Get the html content of the comment.
+	 * Returns the escaped value with html line breaks.
+	 *
+	 * @param string $value
 	 *
 	 * @return string
 	 */
-	public function getHtmlContentAttribute()
+	public function getValueAttribute($value)
 	{
-		return \Markdown::parse($this->comment);
+		return nl2br(strip_tags($value));
 	}
 }

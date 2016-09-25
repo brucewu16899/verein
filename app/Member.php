@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $last_name
  * @property string $form_of_address
  * @property string $email
- * @property string $website
  * @property string $sex
  * @property string $birthday
  * @property \Carbon\Carbon $created_at
@@ -24,6 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property User $creator
  * @property User $user
  * @property MemberComment[] $comments
+ * @property MemberDate[] $dates
  */
 class Member extends Model
 {
@@ -46,7 +46,6 @@ class Member extends Model
 		'last_name',
 		'form_of_address',
 		'email',
-		'website',
 		'sex',
 		'birthday',
 	];
@@ -94,6 +93,16 @@ class Member extends Model
 	}
 
 	/**
+	 * Return dates.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function dates()
+	{
+		return $this->hasMany('Verein\MemberDate');
+	}
+
+	/**
 	 * Get the email address of the user if the member email is empty and a user exists.
 	 * Otherwise return the member email.
 	 *
@@ -118,7 +127,10 @@ class Member extends Model
 	 */
 	public function getSexAttribute($default)
 	{
-		return trans('member.sex.' . $default);
+		if (!empty($default))
+			return trans('member.sex.' . $default);
+		else
+			return '';
 	}
 
 	/**

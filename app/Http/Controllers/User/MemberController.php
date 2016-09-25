@@ -17,7 +17,6 @@ class MemberController extends Controller
 		'last_name' => 'max:255',
 		'form_of_address' => 'max:255',
 		'email' => 'email|max:255',
-		'website' => 'url|max:255',
 		'sex' => 'in:female,male',
 		'birthday' => 'date|max:255',
 	];
@@ -91,9 +90,8 @@ class MemberController extends Controller
 			'last_name' => $request->input('last_name'),
 			'form_of_address' => $request->input('form_of_address'),
 			'email' => $request->input('email'),
-			'website' => $request->input('website'),
 			'sex' => $request->input('sex'),
-			'birthday' => $request->input('birthday'),
+			'birthday' => empty($request->input('birthday')) ? null : $request->input('birthday'),
 		]);
 
 		if (!isset($member))
@@ -138,9 +136,8 @@ class MemberController extends Controller
 			'last_name' => $request->input('last_name'),
 			'form_of_address' => $request->input('form_of_address'),
 			'email' => $request->input('email'),
-			'website' => $request->input('website'),
 			'sex' => $request->input('sex'),
-			'birthday' => $request->input('birthday'),
+			'birthday' => empty($request->input('birthday')) ? null : $request->input('birthday'),
 		]);
 
 		if (!$member->save())

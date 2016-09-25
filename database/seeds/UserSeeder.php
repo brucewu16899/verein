@@ -70,7 +70,6 @@ class UserSeeder extends Seeder
 			'last_name' => 'Black',
 			'form_of_address' => 'Prof. Dr.',
 			'email' => 'max@example.com',
-			'website' => 'http://example.com',
 			'sex' => 'female',
 			'birthday' => '1980-04-12',
 		]);

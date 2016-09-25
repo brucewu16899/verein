@@ -15,7 +15,6 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>{{ trans('member.index.id') }}</th>
 							<th>{{ trans('member.index.name') }}</th>
 							<th>{{ trans('member.index.email') }}</th>
 							<th>{{ trans('member.index.birthday') }}</th>
@@ -25,7 +24,6 @@
 					<tbody>
 						@foreach ($members as $member)
 							<tr>
-								<td>{{ $member->id }}</td>
 								<td><a href="{{ route('member.show', ['member' => $member->id]) }}">{{ $member->name }}</a></td>
 								<td><a href="mailto:{{ $member->email }}">{{ $member->email }}</a></td>
 								<td>
