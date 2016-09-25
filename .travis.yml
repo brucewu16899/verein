@@ -8,11 +8,17 @@ services:
   - mysql
 
 before_script:
+  # Init config
   - cp .env.travis .env
-  - composer self-update
-  # Install dependencies
-  - composer install --prefer-source --no-interaction --optimize-autoloader
+  # Create database
   - mysql -e 'create database travis;'
+  # Install dependencies
+  - composer self-update
+  - composer install --prefer-source --no-interaction --optimize-autoloader
+  - npm install
+  - npm install gulp -g
+  - bower install
+  - gulp
 
 script: vendor/bin/phpunit --coverage-clover storage/logs/clover.xml
 
